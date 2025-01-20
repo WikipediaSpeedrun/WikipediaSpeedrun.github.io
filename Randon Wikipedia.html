@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Wikipedia Articles</title>
+</head>
+<body>
+    <h1>Wikipedia Random Article Game</h1>
+    <div>
+        <h2>Starting Point:</h2>
+        <p><a id="start" href="#" target="_blank">Loading...</a></p>
+    </div>
+    <div>
+        <h2>Ending Point:</h2>
+        <p><a id="end" href="#" target="_blank">Loading...</a></p>
+    </div>
+    <script>
+        function getRandomWikiArticle() {
+            return fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary')
+                .then(response => response.json())
+                .then(data => ({ title: data.title, url: `https://en.wikipedia.org/wiki/${data.title.replace(/ /g, '_')}` }));
+        }
+
+        async function getUniqueRandomArticles() {
+            let startArticle, endArticle;
+            do {
+                startArticle = await getRandomWikiArticle();
+                endArticle = await getRandomWikiArticle();
+            } while (startArticle.title === endArticle.title);
+
+            document.getElementById('start').textContent = startArticle.title;
+            document.getElementById('start').href = startArticle.url;
+            document.getElementById('end').textContent = endArticle.title;
+            document.getElementById('end').href = endArticle.url;
+        }
+
+        getUniqueRandomArticles().catch(error => console.error('Error fetching Wikipedia articles:', error));
+    </script>
+</body>
+</html>

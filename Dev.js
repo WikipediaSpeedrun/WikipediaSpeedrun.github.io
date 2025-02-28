@@ -1,5 +1,5 @@
 <script
-disable-menu='false'
+disable-menu='fale'
 disable-select='true'
 disable-copy='false'
 disable-cut='false'

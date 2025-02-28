@@ -1,5 +1,6 @@
 <script
     disable-devtool-auto
+    src='https://cdn.jsdelivr.net/npm/disable-devtool'
     md5='xxx'
     url='xxx'
     tk-name='xxx'

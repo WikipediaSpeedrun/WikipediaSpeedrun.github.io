@@ -37,10 +37,39 @@
         }
 
         getUniqueRandomArticles().catch(error => console.error('Error fetching Wikipedia articles:', error));
-          			document.addEventListener('contextmenu',
-				event => event.preventDefault());
 
-			elm.innerHTML = "Right click disabled";
+    // Disable F12 key (opens DevTools)
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+            event.preventDefault();
+            alert('Developer Tools are disabled.');
+        }
+    });
+
+    // Disable Ctrl + Shift + I (DevTools)
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+            event.preventDefault();
+            alert('Ctrl+Shift+I is disabled.');
+        }
+    });
+
+    // Disable the Inspect Element Shortcut: Ctrl + Shift + C
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.shiftKey && event.key === 'C') {
+            event.preventDefault();
+            alert('Inspect Element is disabled.');
+        }
+    });
+
+    // Disable access to DevTools on F12 key press
+    window.onkeydown = function(e) {
+        if (e.keyCode == 123) {
+            e.preventDefault();
+        }
+    };
+})();
+
     </script>
     <h2>Credits:</h2>
     <a href="https://chatgpt.com//">ChatGPT for the code</a>
